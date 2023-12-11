@@ -1,0 +1,36 @@
+name: Selenium IDE Website Tester
+description: Verify functionality on your website using Selenium tests from Selenium IDE.
+author: Dylan700
+
+branding:
+  icon: check-square
+  color: green
+
+runs:
+  using: composite
+  steps: 
+    - uses: actions/checkout@v3
+    - name: Build Dockerfile
+      shell: bash
+      run: docker build -t selenium-ide-runner . 
+    - name: Create Screenshots Directory
+      shell: bash
+      run: mkdir -p $GITHUB_WORKSPACE/screenshots
+    - name: Create Reports Directory
+      shell: bash
+      run: mkdir -p $GITHUB_WORKSPACE/reports
+    - name: Run Dockerfile
+      shell: bash
+      run: docker run -v /dev/shm:/dev/shm -v ./:$GITHUB_WORKSPACE -e GITHUB_WORKSPACE=$GITHUB_WORKSPACE -u root selenium-ide-runner
+    - name: Upload Screenshots 
+      uses: actions/upload-artifact@v3
+      with:
+        name: screenshots.zip
+        path: ./screenshots/*.png
+    - name: Generate Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()
+      with:
+          name: Selenium Test Report            
+          path: ./reports/*.xml
+          reporter: jest-junit
