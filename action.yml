@@ -15,18 +15,9 @@ inputs:
 runs:
   using: composite
   steps: 
-    - uses: actions/checkout@v3
-      with: 
-        repository: Dylan700/selenium-ide-action
-        ref: master
-        path: selenium-ide-action
-    - uses: actions/checkout@v3
-    - name: Remove .side files
+    - name: Get Docker Image
       shell: bash
-      run: rm -rf $GITHUB_WORKSPACE/selenium-ide-action/*.side
-    - name: Build Dockerfile
-      shell: bash
-      run: docker build -t selenium-ide-runner selenium-ide-action/Dockerfile 
+      run: docker pull docker.pkg.github.com/dylan700/selenium-ide-runner/selenium-ide-runner:latest
     - name: Create Screenshots Directory
       shell: bash
       run: mkdir -p $GITHUB_WORKSPACE/screenshots
