@@ -17,6 +17,7 @@ RUN google-chrome --version
 # installing dependencies
 RUN npm install -g selenium-side-runner@4.0.0-alpha.57 # we are using this version because of https://github.com/SeleniumHQ/selenium-ide/issues/1536#issuecomment-1312421875
 RUN npm install -g jest-junit
+RUN apt-get update && apt-get install jq -y
 
 USER node
 

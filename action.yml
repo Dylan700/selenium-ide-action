@@ -6,6 +6,12 @@ branding:
   icon: check-square
   color: green
 
+inputs:
+  url: 
+    description: 'URL to test'
+    required: true
+    default: ""
+
 runs:
   using: composite
   steps: 
@@ -21,11 +27,11 @@ runs:
       run: mkdir -p $GITHUB_WORKSPACE/reports
     - name: Run Dockerfile
       shell: bash
-      run: docker run -v /dev/shm:/dev/shm -v ./:$GITHUB_WORKSPACE -e GITHUB_WORKSPACE=$GITHUB_WORKSPACE -u root selenium-ide-runner
+      run: docker run -v /dev/shm:/dev/shm -v ./:$GITHUB_WORKSPACE -e GITHUB_WORKSPACE=$GITHUB_WORKSPACE -e BASE_URL=${{inputs.url}} -u root selenium-ide-runner
     - name: Upload Screenshots 
       uses: actions/upload-artifact@v3
       with:
-        name: screenshots.zip
+        name: screenshots
         path: ./screenshots/*.png
     - name: Generate Test Report
       uses: dorny/test-reporter@v1
