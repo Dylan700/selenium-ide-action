@@ -54,7 +54,7 @@ jobs:
       uses: Dylan700/selenium-ide-action@latest 
 ```
 
-## Testing on Development URL
+### Testing on Development URL
 
 ```yaml
 name: Run Website E2E Tests
