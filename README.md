@@ -31,6 +31,7 @@ Currently, tests are run in the Chrome browser only. However, I am planning on e
 | Input | Required | Description | 
 | -- | -- | -- |
 | url | false | The Base URL to use when running the tests. Defaults to the url in the project. |
+| token | true | The ${{secrets.GITHUB_TOKEN}} or a Personal Access Token to authenticate with the Docker Registry. |
 
 ## Examples
 
@@ -52,6 +53,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: Run Website E2E Tests
       uses: Dylan700/selenium-ide-action@latest 
+      with: 
+        token: ${{secrets.GITHUB_TOKEN}}
 ```
 
 ### Testing on Development URL
@@ -74,6 +77,7 @@ jobs:
       uses: Dylan700/selenium-ide-action@latest 
       with: 
         url: http://development.mysite.com
+        token: ${{secrets.GITHUB_TOKEN}}
 ```
 
 ## Quirks
