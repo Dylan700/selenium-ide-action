@@ -1,0 +1,55 @@
+{
+  "id": "12b3bb00-895f-41b9-909c-db9ab66e577a",
+  "version": "2.0",
+  "name": "Google",
+  "url": "https://www.google.com",
+  "tests": [{
+    "id": "da84fd21-08f4-4fca-9872-a43783417687",
+    "name": "Click Search Box",
+    "commands": [{
+      "id": "a7b6366c-0f8e-4aa5-bf72-15a674813682",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7899c499-1b07-472b-af12-81c13857310f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1487x892",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "400ca477-8a01-4268-90ea-474d3976da89",
+      "comment": "",
+      "command": "click",
+      "target": "id=APjFqb",
+      "targets": [
+        ["id=APjFqb", "id"],
+        ["name=q", "name"],
+        ["css=#APjFqb", "css:finder"],
+        ["xpath=//textarea[@id='APjFqb']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4fbb708a-bb3e-48ff-85c5-0555905ae50a",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "9f390f36-3711-4195-b0ce-565de528627a",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["da84fd21-08f4-4fca-9872-a43783417687"]
+  }],
+  "urls": ["https://www.google.com/"],
+  "plugins": []
+}
