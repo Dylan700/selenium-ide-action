@@ -11,6 +11,7 @@ Currently, tests are run in the Chrome browser only. However, I am planning on e
 
 ## Table of Contents
 1. [How To Use](#How-To-Use)
+1. [Inputs](#Inputs)
 1. [Examples](#Examples)
 1. [Quirks](#Quirks)
 1. [Contributions](#Contributions)
@@ -25,9 +26,15 @@ Currently, tests are run in the Chrome browser only. However, I am planning on e
 
 4. Add one of the [example snippets](#Examples) as a starting point and you're good to go! 
 
+## Inputs
+
+| Input | Required | Description | 
+| -- | -- | -- |
+| url | false | The Base URL to use when running the tests. Defaults to the url in the project. |
+
 ## Examples
 
-Please see the example below for a typical setup.
+### Typical Setup
 
 ```yaml
 name: Run Website E2E Tests
@@ -45,6 +52,28 @@ jobs:
     - uses: actions/checkout@v3
     - name: Run Website E2E Tests
       uses: Dylan700/selenium-ide-action@latest 
+```
+
+## Testing on Development URL
+
+```yaml
+name: Run Website E2E Tests
+on: [push, pull_request]
+jobs:
+  build:
+    permissions:
+      statuses: write
+      checks: write
+      contents: write
+      pull-requests: write
+      actions: write
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run Website E2E Tests
+      uses: Dylan700/selenium-ide-action@latest 
+      with: 
+        url: http://development.mysite.com
 ```
 
 ## Quirks
