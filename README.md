@@ -1,5 +1,6 @@
 <div align="center">
-<h1>Selenium IDE Website Tester</h1>
+  <img height="auto" width="150" src="https://github.com/Dylan700/selenium-ide-action/assets/54528768/5c999952-2d22-4e34-be13-1f4b69a3e070">
+  <h1>Selenium IDE Website Tester</h1>
 </div>
 
 <hr>
@@ -13,7 +14,7 @@ Currently, tests are run in the Chrome browser only. However, I am planning on e
 1. [How To Use](#How-To-Use)
 1. [Inputs](#Inputs)
 1. [Examples](#Examples)
-1. [Quirks](#Quirks)
+1. [Tips](#Tips)
 1. [Contributions](#Contributions)
 
 ## How To Use
@@ -80,7 +81,7 @@ jobs:
         token: ${{secrets.GITHUB_TOKEN}}
 ```
 
-## Quirks
+## Tips
 
 The nature of automated browser testing can be flaky. Please be aware that tests may fail due to services such as Cloudflare blocking the requests or issues with loading times etc.
 
