@@ -9,12 +9,14 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
+    - name: Set Repository Name as Lower Case
+      run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV} 
+      shell: bash
     - name: Build Docker image
       uses: docker/build-push-action@v2
       with:
         context: .
         push: false
-        tags: ${{github.repository}}:test-${{github.sha}}
+        tags: test-${{github.sha}}
     - name: Run Docker image
-      run: docker run -v /dev/shm:/dev/shm -v ./:$GITHUB_WORKSPACE -e GITHUB_WORKSPACE=$GITHUB_WORKSPACE -e BASE_URL="" -u root ${{github.repository}}:test-${{github.sha}}
+      run: docker run -v /dev/shm:/dev/shm -v ./:$GITHUB_WORKSPACE -e GITHUB_WORKSPACE=$GITHUB_WORKSPACE -e BASE_URL="" -u root $REPO:test-${{github.sha}}
