@@ -31,6 +31,30 @@ RUN apt-get update && apt-get install jq -y
 # Patching chrome driver as per https://stackoverflow.com/questions/51770608/selenium-does-not-work-with-a-chromedriver-modified-to-avoid-detection
 RUN perl -pi -e 's/cdc_/dog_/g' /usr/bin/chromedriver
 
+# installing firefox browser 
+RUN FIREFOX_DOWNLOAD_URL="https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US" \
+  && apt-get update -qqy \
+  && apt-get -qqy --no-install-recommends install libavcodec-extra \
+     libgtk-3-dev libdbus-glib-1-dev \
+  && rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
+  && wget --no-verbose -O /tmp/firefox.tar.bz2 $FIREFOX_DOWNLOAD_URL \
+  && rm -rf /opt/firefox \
+  && tar -C /opt -xjf /tmp/firefox.tar.bz2 \
+  && rm /tmp/firefox.tar.bz2 \
+  && mv /opt/firefox /opt/firefox-$FIREFOX_VERSION \
+  && ln -fs /opt/firefox-$FIREFOX_VERSION/firefox /usr/bin/firefox
+
+# installing gecko driver
+RUN GK_VERSION=0.33.0\
+  && echo "Using GeckoDriver version: "$GK_VERSION \
+  && wget --no-verbose -O /tmp/geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v$GK_VERSION/geckodriver-v$GK_VERSION-linux64.tar.gz \
+  && rm -rf /opt/geckodriver \
+  && tar -C /opt -zxf /tmp/geckodriver.tar.gz \
+  && rm /tmp/geckodriver.tar.gz \
+  && mv /opt/geckodriver /opt/geckodriver-$GK_VERSION \
+  && chmod 755 /opt/geckodriver-$GK_VERSION \
+  && ln -fs /opt/geckodriver-$GK_VERSION /usr/bin/geckodriver
+
 USER node
 
 WORKDIR /home/node

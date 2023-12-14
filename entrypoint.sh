@@ -13,6 +13,9 @@ test_selenium () {
     echo "Running tests for Chrome"
     JEST_JUNIT_OUTPUT_DIR=$GITHUB_WORKSPACE/reports JEST_JUNIT_OUTPUT_NAME=selenium-chrome-tests-report-$FILE_NAME.xml selenium-side-runner -c "browserName=chrome goog:chromeOptions.args=[headless, no-sandbox, remote-debugging-port=9222, disable-web-security, disable-features=IsolateOrigins,site-per-process]" -z $GITHUB_WORKSPACE/screenshots --retries 1 --output-directory $GITHUB_WORKSPACE/reports -j " --reporters=jest-junit  --reporters=default " --timeout 5000 --base-url $2 $1
 
+    echo "Running tests for Firefox"
+    MOZ_HEADLESS=1 JEST_JUNIT_OUTPUT_DIR=$GITHUB_WORKSPACE/reports JEST_JUNIT_OUTPUT_NAME=selenium-firefox-tests-report-$FILE_NAME.xml selenium-side-runner -c "browserName=firefox moz:firefoxOptions.args=[-headless, -safe-mode]" -z $GITHUB_WORKSPACE/screenshots --retries 1 --output-directory $GITHUB_WORKSPACE/reports -j " --reporters=jest-junit  --reporters=default " --timeout 5000 --debug --base-url $2 $1
+
     echo "######## Tests complete for '$1' ########\n"
 }
 
